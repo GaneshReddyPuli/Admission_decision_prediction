@@ -89,6 +89,13 @@ def predict(X, w, b):
 
     return p
 
+def calculate_accuracy(predictions, labels):
+
+    correct_predictions = np.sum(predictions == labels)
+    total_predictions = len(labels)
+    accuracy = (correct_predictions / total_predictions) * 100
+    return accuracy
+
 # Compute the cost of the model
 def compute_cost(X, y, w, b):
 
@@ -152,6 +159,10 @@ print(f"\nOptimal parameters: w:{w_out}, b:{b_out}")
 cost = compute_cost(X_train, y_train, w_out, b_out)
 print("Cost of our model: ",cost)
 
+predictions = predict(X_train, w_out, b_out)
+acc = calculate_accuracy(predictions, y_train)
+print("Accuracy of our model:",acc)
+
 # Functions to plot the decision boundary
 def map_feature(X1, X2):
 
@@ -197,9 +208,9 @@ plt.xlabel('Exam 1 score')
 plt.legend(loc="upper right")
 plt.show()
 
-# Compute accuracy on our training set
+'''# Compute accuracy on our training set
 p = predict(X_train, w_out, b_out)
-print('Train Accuracy: %f'%(np.mean(p == y_train) * 100))
+print('Train Accuracy: %f'%(np.mean(p == y_train) * 100))'''
 
 print("\nPlease enter the scores of the applicant")
 X_test = []
